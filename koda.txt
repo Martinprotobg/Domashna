@@ -1,0 +1,58 @@
+static void Main(string[] args)
+{
+    string[] izbor = { "Камък", "Ножица", "Хартия" };
+    Random comput = new Random();
+
+    Console.WriteLine("=== Игра: Камък, Ножица, Хартия ===");
+    Console.WriteLine("1. Камък");
+    Console.WriteLine("2. Ножица");
+    Console.WriteLine("3. Хартия");
+
+    while (true)
+    {
+        // Izbor na kamuk nojica ili hartiq
+        int tvoiizbor;
+        while (true)
+        {
+            Console.Write("Избери (1-3): ");
+            string vhod = Console.ReadLine();
+
+            // Proverka za greshak v izbiraneto na kamuk nojica ili zartiq "samo tova sum vidql ot chatgpt"
+            if (!int.TryParse(vhod, out tvoiizbor) || tvoiizbor < 1 || tvoiizbor > 3)
+            {
+                Console.WriteLine("Error");
+                continue; 
+            }
+            break; 
+        }
+
+        // Komputera izbira chislo
+        int comp = comput.Next(1, 4); 
+
+        Console.WriteLine($"Ти избра {izbor[tvoiizbor - 1]}");
+        Console.WriteLine($"Компютъра избра: {izbor[comp - 1]}");
+
+        // Proverka koi pecheli
+        if (tvoiizbor == comp)
+        {
+            Console.WriteLine("Равенство");
+        }
+        else if (
+            (tvoiizbor == 1 && comp == 2) || // kamuk > nojica
+            (tvoiizbor == 2 && comp == 3) || // nojica > hartia
+            (tvoiizbor == 3 && comp == 1)    // hartiq > kamuk
+        )
+        {
+            Console.WriteLine("Ти спечели");
+        }
+        else
+        {
+            Console.WriteLine("Ти загуби");
+        }
+
+
+
+        Console.WriteLine("Натисни enter за нова игра");
+        Console.ReadLine();
+
+    }
